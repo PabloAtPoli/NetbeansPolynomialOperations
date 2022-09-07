@@ -44,6 +44,17 @@ public class Polynomial {
             listSimplified.add(new Term(coefficient, exponent));
         }
 
+        // It eliminates terms with zero coefficients
+        int i= 0;
+        while (i < listSimplified.size() ){
+            if ( listSimplified.get(i).getCoefficient()== 0  ){
+                listSimplified.remove(i);
+            }else{
+                i++;
+            }
+        }
+        
+        // To Do
         // It sorts the polynomial by exponent in descending order
         Collections.sort(listSimplified);
 
@@ -57,23 +68,19 @@ public class Polynomial {
         boolean isFirstTerm = true;
 
         for (Term term : listTerm) {
-            if (term.getCoefficient() != 0) {
-                // It does not show the coefficient if it is zero
-
-                if (isFirstTerm) {
-                    isFirstTerm = false;
-                    if (term.getCoefficient() < 0) {
-                        polynomial += "-";
-                    }
-                } else {
-                    if (term.getCoefficient() < 0) {
-                        polynomial += "-";
-                    } else {
-                        polynomial += "+";
-                    }
+            if (isFirstTerm) {
+                isFirstTerm = false;
+                if (term.getCoefficient() < 0) {
+                    polynomial += "-";
                 }
-                polynomial += term.toString();
+            } else {
+                if (term.getCoefficient() < 0) {
+                    polynomial += "-";
+                } else {
+                    polynomial += "+";
+                }
             }
+            polynomial += term.toString();
 
         }
         return polynomial;
@@ -106,7 +113,7 @@ public class Polynomial {
 
         for (Term term : listTerm) {
             // Change coefficient sign
-            Term term2 = new Term(term.getCoefficient()*-1,term.getExponent());
+            Term term2 = new Term(term.getCoefficient() * -1, term.getExponent());
             polyResult.addTerm(term2);
         }
 
@@ -114,8 +121,8 @@ public class Polynomial {
 
         return polyResult;
     }
-    
-        public Polynomial multiply(Polynomial poly) {
+
+    public Polynomial multiply(Polynomial poly) {
 
         Polynomial polyResult = new Polynomial();
 
@@ -123,12 +130,12 @@ public class Polynomial {
 
         for (Term term1 : listTerm1) {
             List<Term> listTerm2 = getListTerm();
-            
-             for (Term term2 : listTerm2) {
-                 Term term = new Term(term1.getCoefficient()*term2.getCoefficient(), term1.getExponent()+term2.getExponent());
-                 polyResult.addTerm(term);
-             }
-          
+
+            for (Term term2 : listTerm2) {
+                Term term = new Term(term1.getCoefficient() * term2.getCoefficient(), term1.getExponent() + term2.getExponent());
+                polyResult.addTerm(term);
+            }
+
         }
 
         polyResult.symplify();
