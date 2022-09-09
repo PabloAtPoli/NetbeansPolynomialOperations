@@ -45,15 +45,15 @@ public class Polynomial {
         }
 
         // It eliminates terms with zero coefficients
-        int i= 0;
-        while (i < listSimplified.size() ){
-            if ( listSimplified.get(i).getCoefficient()== 0  ){
+        int i = 0;
+        while (i < listSimplified.size()) {
+            if (listSimplified.get(i).getCoefficient() == 0) {
                 listSimplified.remove(i);
-            }else{
+            } else {
                 i++;
             }
         }
-        
+
         // To Do
         // It sorts the polynomial by exponent in descending order
         Collections.sort(listSimplified);
@@ -141,5 +141,42 @@ public class Polynomial {
         polyResult.symplify();
 
         return polyResult;
+    }
+
+    public Polynomial dividy(Polynomial polyDivisor) {
+
+        Polynomial polyQuotient = new Polynomial();
+
+        List<Term> listTermDividend = getListTerm();
+        int i = 0;
+        boolean continueProcess = true;
+        while (i < listTermDividend.size() && continueProcess) {
+            List<Term> listTermDivisor = polyDivisor.getListTerm();
+
+            double coefficient = listTermDividend.get(0).getCoefficient() / listTermDivisor.get(0).getCoefficient();
+
+            if (listTermDividend.get(0).getExponent() >= listTermDivisor.get(0).getExponent()) {
+                int exponent = listTermDividend.get(0).getExponent() - listTermDivisor.get(0).getExponent();
+                Term termQuotient = new Term(coefficient, exponent);
+                polyQuotient.addTerm(termQuotient);
+
+                Polynomial monomial = new Polynomial();
+                monomial.addTerm(termQuotient);
+
+                Polynomial polyMultiplication = polyDivisor.multiply(monomial);
+
+                Polynomial poliDividend = this.subtract(polyMultiplication);
+
+                listTermDividend = poliDividend.getListTerm();
+                i++;
+            } else {
+                continueProcess = false;
+            }
+
+        }
+
+        polyQuotient.symplify();
+
+        return polyQuotient;
     }
 }
