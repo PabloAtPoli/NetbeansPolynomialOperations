@@ -32,13 +32,23 @@ public class Term implements Comparable<Term> {
 
         term = Double.toString(Math.abs(coefficient));
 
-        if (exponent == 0) {
-            term += exponent;
+        if (exponent == 1) {
+            if (coefficient==1){
+                // It does not concatenate a 1 
+                term = "X"; 
+            }else{
+                term += "X"; 
+            }
+           
         } else {
-            if (exponent == 1) {
-                term += "X";
-            } else {
-                term += "X^" + exponent;
+            if (exponent != 0) {
+                if (coefficient==1){
+                    // It does not concatenate a 1 
+                   term = "X^" + exponent;
+                }else{
+                    term += "X^" + exponent;
+                }
+                
             }
         }
 

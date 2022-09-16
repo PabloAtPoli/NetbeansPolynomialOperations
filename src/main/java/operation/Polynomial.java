@@ -6,7 +6,22 @@ import java.util.List;
 
 public class Polynomial {
 
-    private List<Term> listTerm = new LinkedList<>();
+    private List<Term> listTerm;
+    private Polynomial polyDividendRemainder;
+    private Polynomial polyDivisor;
+
+    public void setPolyDividendRemainder(Polynomial polyDividendRemainder) {
+        this.polyDividendRemainder = polyDividendRemainder;
+    }
+
+    public void setPolyDivisor(Polynomial polyDivisor) {
+        this.polyDivisor = polyDivisor;
+    }
+
+    public void setListTerm(List<Term> listTerm) {
+        this.listTerm = listTerm;
+
+    }
 
     public Polynomial() {
         listTerm = new LinkedList<>();
@@ -14,6 +29,7 @@ public class Polynomial {
 
     public Polynomial(List<Term> listTerm) {
         this.listTerm = listTerm;
+
     }
 
     public void addTerm(Term term) {
@@ -83,6 +99,12 @@ public class Polynomial {
             polynomial += term.toString();
 
         }
+
+        if (polyDividendRemainder != null) {
+            // The polynomial division has a remainder
+            polynomial += " + (" + polyDividendRemainder.toString() + ") / " + polyDivisor.toString();
+        }
+
         return polynomial;
     }
 
@@ -143,11 +165,15 @@ public class Polynomial {
         return polyResult;
     }
 
-    public Polynomial dividy(Polynomial polyDivisor) {
+    public Polynomial divide(Polynomial polyDivisor) {
 
         Polynomial polyQuotient = new Polynomial();
 
-        List<Term> listTermDividend = getListTerm();
+        //   List<Term> listTermDividend = getListTerm();
+        Polynomial poliDividend = new Polynomial(this.getListTerm());
+
+        List<Term> listTermDividend = poliDividend.getListTerm();
+
         int i = 0;
         boolean continueProcess = true;
         while (i < listTermDividend.size() && continueProcess) {
@@ -165,18 +191,21 @@ public class Polynomial {
 
                 Polynomial polyMultiplication = polyDivisor.multiply(monomial);
 
-                Polynomial poliDividend = this.subtract(polyMultiplication);
+                poliDividend = poliDividend.subtract(polyMultiplication);
 
                 listTermDividend = poliDividend.getListTerm();
                 i++;
             } else {
                 continueProcess = false;
             }
-
         }
 
         polyQuotient.symplify();
 
+        polyQuotient.setPolyDividendRemainder(poliDividend);
+        polyQuotient.setPolyDivisor(polyDivisor);
+
         return polyQuotient;
     }
+
 }
