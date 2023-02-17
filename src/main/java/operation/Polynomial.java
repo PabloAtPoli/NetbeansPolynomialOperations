@@ -70,42 +70,41 @@ public class Polynomial {
             }
         }
 
-        // To Do
-        // It sorts the polynomial by exponent in descending order
-        Collections.sort(listSimplified);
-
         // It overwrites the initial list of terms
         listTerm = listSimplified;
     }
 
     @Override
     public String toString() {
-        String polynomial = "";
+        String strPolynomial = "";
         boolean isFirstTerm = true;
+
+        // It sorts the Polynomial by exponent in descending order
+        Collections.sort(listTerm);
 
         for (Term term : listTerm) {
             if (isFirstTerm) {
                 isFirstTerm = false;
                 if (term.getCoefficient() < 0) {
-                    polynomial += "-";
+                    strPolynomial += "-";
                 }
             } else {
                 if (term.getCoefficient() < 0) {
-                    polynomial += "-";
+                    strPolynomial += "-";
                 } else {
-                    polynomial += "+";
+                    strPolynomial += "+";
                 }
             }
-            polynomial += term.toString();
-
+            strPolynomial += term.toString();
         }
 
+        // This code is used when division is performed
         if (polyDividendRemainder != null) {
-            // The polynomial division has a remainder
-            polynomial += " + (" + polyDividendRemainder.toString() + ") / " + polyDivisor.toString();
+            // The strPolynomial division has a remainder
+            strPolynomial += " + (" + polyDividendRemainder.toString() + ") / " + polyDivisor.toString();
         }
 
-        return polynomial;
+        return strPolynomial;
     }
 
     public List<Term> getListTerm() {
@@ -133,6 +132,7 @@ public class Polynomial {
 
         List<Term> listTerm = poly.getListTerm();
 
+        // It adds the negative terms of Polynomial parameter method 
         for (Term term : listTerm) {
             // Change coefficient sign
             Term term2 = new Term(term.getCoefficient() * -1, term.getExponent());

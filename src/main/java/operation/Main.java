@@ -9,14 +9,24 @@ public class Main {
     static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
-//        Polynomial poly = new Polynomial();
-//
+        Polynomial poly = new Polynomial();
+
 //        poly = readPolynomial();
+//        hard coded polynomial-9x^3+10x^3-5x^2+8x-7+5x^2
+//        poly.addTerm(new Term(-9, 3));
+//        poly.addTerm(new Term(10, 3));
+//        poly.addTerm(new Term(-5, 2));
+//        poly.addTerm(new Term(8, 1));
+//        poly.addTerm(new Term(-7, 0));
+//        poly.addTerm(new Term(5, 2));
+
 //        System.out.println("The polynomial read is " + poly.toString());
+//        System.out.println("The hardcoded polynomial is " + poly.toString());
 //        poly.symplify();
 //
 //        System.out.println("The symplified polynomial is " + poly.toString());
-//       //  (6y^2−9y + 4)−(−7y^2 +5y + 1 )
+        //  p1(x)=6y^2−9y + 4
+        //  p2(x)=−7y^2 +5y + 1 
 //        Polynomial poly1 = new Polynomial();
 //        poly1.addTerm(new Term(6, 2));
 //        poly1.addTerm(new Term(-9, 1));
@@ -30,24 +40,27 @@ public class Main {
 //        System.out.println("The polynomial1 is " + poly1.toString());
 //        System.out.println("The polynomial2 is " + poly2.toString());
 //
+//        Polynomial polyAddition = poly1.add(poly2);
+//        System.out.println("The addition polynomial is " + polyAddition.toString());
+//
 //        Polynomial polySubtraction = poly1.subtract(poly2);
 //        System.out.println("The subtraction polynomial is " + polySubtraction.toString());
-//
-//        // (p^2+p−6)(p^2 −6)
-//        Polynomial poly3 = new Polynomial();
-//        poly3.addTerm(new Term(1, 2));
-//        poly3.addTerm(new Term(1, 1));
-//        poly3.addTerm(new Term(-6, 0));
-//
-//        Polynomial poly4 = new Polynomial();
-//        poly4.addTerm(new Term(1, 2));
-//        poly4.addTerm(new Term(-6, 0));
-//
-//        System.out.println("The polynomial 3 is " + poly3.toString());
-//        System.out.println("The polynomial 4 is " + poly4.toString());
-//
-//        Polynomial polyMultiplication = poly3.multiply(poly4);
-//        System.out.println("The multiplication polynomial is " + polyMultiplication.toString());
+
+//         (p^2+p−6)(p^2 −6)
+        Polynomial poly3 = new Polynomial();
+        poly3.addTerm(new Term(1, 2));
+        poly3.addTerm(new Term(1, 1));
+        poly3.addTerm(new Term(-6, 0));
+
+        Polynomial poly4 = new Polynomial();
+        poly4.addTerm(new Term(1, 2));
+        poly4.addTerm(new Term(-6, 0));
+
+        System.out.println("The polynomial 3 is " + poly3.toString());
+        System.out.println("The polynomial 4 is " + poly4.toString());
+
+        Polynomial polyMultiplication = poly3.multiply(poly4);
+        System.out.println("The multiplication polynomial is " + polyMultiplication.toString());
 
 //        List<Term> listTerm1 = new LinkedList<>();
 //
@@ -94,24 +107,22 @@ public class Main {
 //
 //        System.out.println(
 //                "The addition of the two polynomials is " + polyAddition.toString());
-
-        Polynomial  polyDividend = new Polynomial();
-        polyDividend.addTerm(new Term(4, 4));
-        polyDividend.addTerm(new Term(-23, 3));
-        polyDividend.addTerm(new Term(16, 2));
-        polyDividend.addTerm(new Term(-4, 1));
-        polyDividend.addTerm(new Term(-1, 0));
-
-        Polynomial polyDivisor = new Polynomial();
-        polyDivisor.addTerm(new Term(1, 2));
-        polyDivisor.addTerm(new Term(-5, 1));
-        
-        Polynomial polyQuotient = polyDividend.divide(polyDivisor);
-        
-        System.out.println("The dividend polynomial is " + polyDividend.toString());
-        System.out.println("The divisor polynomial is " + polyDivisor.toString());
-        System.out.println("The quotient polynomial is " + polyQuotient.toString());
-
+//        Polynomial  polyDividend = new Polynomial();
+//        polyDividend.addTerm(new Term(4, 4));
+//        polyDividend.addTerm(new Term(-23, 3));
+//        polyDividend.addTerm(new Term(16, 2));
+//        polyDividend.addTerm(new Term(-4, 1));
+//        polyDividend.addTerm(new Term(-1, 0));
+//
+//        Polynomial polyDivisor = new Polynomial();
+//        polyDivisor.addTerm(new Term(1, 2));
+//        polyDivisor.addTerm(new Term(-5, 1));
+//        
+//        Polynomial polyQuotient = polyDividend.divide(polyDivisor);
+//        
+//        System.out.println("The dividend polynomial is " + polyDividend.toString());
+//        System.out.println("The divisor polynomial is " + polyDivisor.toString());
+//        System.out.println("The quotient polynomial is " + polyQuotient.toString());
     }
 
     public static Polynomial readPolynomial() {
