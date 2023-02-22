@@ -101,7 +101,11 @@ public class Polynomial {
         // This code is used when division is performed
         if (polyDividendRemainder != null) {
             // The strPolynomial division has a remainder
-            strPolynomial += " + (" + polyDividendRemainder.toString() + ") / " + polyDivisor.toString();
+            if (polyDivisor.getListTerm().size()>1){
+                 strPolynomial += " + (" + polyDividendRemainder.toString() + ") / " + "("+ polyDivisor.toString()+")";
+            }else{
+                 strPolynomial += " + (" + polyDividendRemainder.toString() + ") / " + polyDivisor.toString();
+            } 
         }
 
         return strPolynomial;
@@ -179,10 +183,12 @@ public class Polynomial {
         while (i < listTermDividend.size() && continueProcess) {
             List<Term> listTermDivisor = polyDivisor.getListTerm();
 
-            double coefficient = listTermDividend.get(0).getCoefficient() / listTermDivisor.get(0).getCoefficient();
+            double coefficient = listTermDividend.get(0).getCoefficient()
+                   / listTermDivisor.get(0).getCoefficient();
 
             if (listTermDividend.get(0).getExponent() >= listTermDivisor.get(0).getExponent()) {
-                int exponent = listTermDividend.get(0).getExponent() - listTermDivisor.get(0).getExponent();
+                int exponent = listTermDividend.get(0).getExponent() - 
+                        listTermDivisor.get(0).getExponent();
                 Term termQuotient = new Term(coefficient, exponent);
                 polyQuotient.addTerm(termQuotient);
 
